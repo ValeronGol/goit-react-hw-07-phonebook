@@ -1,10 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
-import { addContact, deleteContact, filterContact } from 'redux/actions';
+import { getContacts, getFilter } from 'redux/contacts-selectors';
+import {
+  addContact,
+  deleteContact,
+  filterContact,
+} from 'redux/contacts-actions';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
-import { Conteiner } from './App.styled';
+import { Container } from './App.styled';
 
 export default function App() {
   const contacts = useSelector(getContacts);
@@ -36,7 +40,7 @@ export default function App() {
   const filterContacts = filterbyContacts();
 
   return (
-    <Conteiner>
+    <Container>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={formSubmit} />
       <h1>Contacts</h1>
@@ -45,6 +49,6 @@ export default function App() {
         contacts={filterContacts}
         onDelete={id => dispatch(deleteContact(id))}
       />
-    </Conteiner>
+    </Container>
   );
 }
