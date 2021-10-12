@@ -1,10 +1,13 @@
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/contacts-selectors';
 import {
-  addContact,
-  deleteContact,
-  filterContact,
-} from 'redux/contacts-actions';
+  getContacts,
+  getFilter,
+  getIsLoading,
+  getError,
+} from 'redux/contacts-selectors';
+import { filterContact } from 'redux/contacts-actions';
+import { fetchContact, addContact } from 'redux/contacts-actionOperation';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
@@ -13,7 +16,13 @@ import { Container } from './App.styled';
 export default function App() {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchContact());
+  }, [dispatch]);
 
   const formSubmit = ({ name, number }) => {
     const duplicateContact = contacts.find(contact => {
@@ -43,12 +52,13 @@ export default function App() {
     <Container>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={formSubmit} />
+      {isLoading && <h1>Загружаем...</h1>}
+      {error && (
+        <h1 style={{ color: 'red' }}>Произошла ошибка, попробуйте снова...</h1>
+      )}
       <h1>Contacts</h1>
       <Filter setFilterToState={setFilterToState} />
-      <ContactList
-        contacts={filterContacts}
-        onDelete={id => dispatch(deleteContact(id))}
-      />
+      <ContactList contacts={filterContacts} />
     </Container>
   );
 }
