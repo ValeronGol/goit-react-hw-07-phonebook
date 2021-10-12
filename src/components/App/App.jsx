@@ -32,7 +32,12 @@ export default function App() {
       alert(`${name} вже є у телефонній книзі!!!`);
       return [...contacts];
     } else {
-      return dispatch(addContact(name, number));
+      return dispatch(
+        addContact({
+          name: name,
+          number: number,
+        }),
+      );
     }
   };
 

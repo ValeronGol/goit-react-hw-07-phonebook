@@ -27,7 +27,7 @@ function ContactList({ contacts }) {
 ContactList.propTypes = {
   contacts: PropTypes.arrayOf(
     PropTypes.exact({
-      id: PropTypes.string,
+      id: PropTypes.number,
       name: PropTypes.string,
       number: PropTypes.string,
     }),
