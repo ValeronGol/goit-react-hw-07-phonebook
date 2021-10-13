@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "name": "Rosie Simpson",
-      "number": "68434575879",
-      "id": 2
-    },
-    {
       "name": "Hermione Kline",
       "number": "545632125456",
       "id": 3
@@ -14,6 +9,11 @@
       "name": "Валера Головатенко",
       "number": "+380956734590",
       "id": 4
+    },
+    {
+      "name": "Rosie Simpson",
+      "number": "545632125456",
+      "id": 5
     }
   ]
 }

@@ -11,6 +11,7 @@ import { fetchContact, addContact } from 'redux/contacts-actionOperation';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
+import { LoaderMore } from 'components/Loader/Loader';
 import { Container } from './App.styled';
 
 export default function App() {
@@ -57,12 +58,11 @@ export default function App() {
     <Container>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={formSubmit} />
-      {isLoading && <h1>Загружаем...</h1>}
-      {error && (
-        <h1 style={{ color: 'red' }}>Произошла ошибка, попробуйте снова...</h1>
-      )}
+
       <h1>Contacts</h1>
       <Filter setFilterToState={setFilterToState} />
+      {isLoading && <LoaderMore />}
+      {error && <h1>Ой ошибка, всё пропало!!!</h1>}
       <ContactList contacts={filterContacts} />
     </Container>
   );
