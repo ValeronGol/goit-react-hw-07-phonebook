@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   getContacts,
   getFilter,
@@ -12,6 +14,7 @@ import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import { LoaderMore } from 'components/Loader/Loader';
+import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
 import { Container } from './App.styled';
 
 export default function App() {
@@ -30,7 +33,7 @@ export default function App() {
       return contact.name === name;
     });
     if (duplicateContact) {
-      alert(`${name} вже є у телефонній книзі!!!`);
+      toast.warn(`${name} is in the phonebook!!!`);
       return [...contacts];
     } else {
       return dispatch(
@@ -58,12 +61,12 @@ export default function App() {
     <Container>
       <h1>Phonebook</h1>
       <ContactForm onSubmit={formSubmit} />
-
       <h1>Contacts</h1>
       <Filter setFilterToState={setFilterToState} />
       {isLoading && <LoaderMore />}
-      {error && <h1>Ой ошибка, всё пропало!!!</h1>}
+      {error && <ErrorMessage />}
       <ContactList contacts={filterContacts} />
+      <ToastContainer position="top-center" theme="colored" />
     </Container>
   );
 }
