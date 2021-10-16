@@ -7,13 +7,13 @@ import {
   getIsLoading,
   getError,
 } from 'redux/contacts-selectors';
-import { fetchContact } from 'redux/contacts-actionOperation';
+import { fetchContact } from 'redux/contacts-operations';
 import ContactForm from 'components/ContactForm/ContactForm';
 import ContactList from 'components/ContactList/ContactList';
 import Filter from 'components/Filter/Filter';
 import { LoaderMore } from 'components/Loader/Loader';
 import { ErrorMessage } from 'components/ErrorMessage/ErrorMessage';
-import { Container } from './App.styled';
+import { Container, Title } from './App.styled';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function App() {
@@ -37,9 +37,9 @@ export default function App() {
 
   return (
     <Container>
-      <h1>Phonebook</h1>
+      <Title>Phonebook</Title>
       <ContactForm />
-      <h1>Contacts</h1>
+      <Title>Contacts</Title>
       <Filter />
       {isLoading && <LoaderMore />}
       {error && <ErrorMessage />}

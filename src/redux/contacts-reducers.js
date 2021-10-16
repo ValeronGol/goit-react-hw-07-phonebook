@@ -5,7 +5,7 @@ import {
   addContact,
   fetchContact,
   deleteContact,
-} from 'redux/contacts-actionOperation';
+} from 'redux/contacts-operations';
 
 const filterReducer = createReducer('', {
   [filterContact]: (_, { payload }) => payload,

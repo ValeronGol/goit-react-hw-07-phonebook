@@ -1,16 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const serverUrl = 'http://localhost:3700/contacts';
+axios.defaults.baseURL = 'http://localhost:3700';
 
 export const fetchContact = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, { rejectWithValue }) => {
     try {
-      const contacts = await axios.get(serverUrl);
-      return contacts.data;
+      const { data } = await axios.get('/contacts');
+      return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -19,13 +19,13 @@ export const addContact = createAsyncThunk(
   'contacts/addContacts',
   async ({ name, number }, { rejectWithValue }) => {
     try {
-      const contacts = await axios.post(serverUrl, {
+      const { data } = await axios.post('/contacts', {
         name,
         number,
       });
-      return contacts.data;
+      return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   },
 );
@@ -34,10 +34,10 @@ export const deleteContact = createAsyncThunk(
   'contacts/deleteContacts',
   async (id, { rejectWithValue }) => {
     try {
-      await axios.delete(`${serverUrl}/${id}`);
+      await axios.delete(`/contacts/${id}`);
       return id;
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error.message);
     }
   },
 );
