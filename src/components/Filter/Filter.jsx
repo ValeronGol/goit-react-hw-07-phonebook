@@ -1,8 +1,13 @@
+import { useDispatch } from 'react-redux';
+import { filterContact } from 'redux/contacts-actions';
 import { Conteiner, Title, Input } from './Filter.styled';
 
-export default function Filter(props) {
+export default function Filter() {
+  const dispatch = useDispatch();
+
   const setFilterValue = event => {
-    props.setFilterToState(event.currentTarget.value.toUpperCase());
+    const filterValue = event.currentTarget.value.toUpperCase();
+    return dispatch(filterContact(filterValue));
   };
 
   return (

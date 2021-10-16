@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { addContact } from 'redux/contacts-actionOperation';
+import { getContacts } from 'redux/contacts-selectors';
 import { ConteinerForm, Label, Button, Input } from './ContactForm.styled';
 
-export default function ContactForm(props) {
+export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contacts = useSelector(getContacts);
   const contact = { name, number };
+  const dispatch = useDispatch();
 
   const handleChangeName = event => {
     setName(event.currentTarget.value);
@@ -16,9 +22,15 @@ export default function ContactForm(props) {
 
   const handleSubmit = event => {
     event.preventDefault();
-
-    props.onSubmit(contact);
-
+    const duplicateContact = contacts.find(contact => {
+      return contact.name === name;
+    });
+    if (duplicateContact) {
+      toast.warn(`${name} is in the phonebook!!!`);
+      resetState();
+      return [...contacts];
+    }
+    dispatch(addContact(contact));
     resetState();
   };
 

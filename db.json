@@ -1,14 +1,19 @@
 {
   "contacts": [
     {
-      "name": "Hermione Kline",
-      "number": "545632125456",
-      "id": 3
-    },
-    {
       "name": "Rosie Simpson",
       "number": "68434575879",
       "id": 4
+    },
+    {
+      "name": "Hermione Kline",
+      "number": "68434575879",
+      "id": 6
+    },
+    {
+      "name": "паир",
+      "number": "545632125456",
+      "id": 7
     }
   ]
 }
