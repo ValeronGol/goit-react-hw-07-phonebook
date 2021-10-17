@@ -27,7 +27,7 @@ export default function App() {
       <Title>Contacts</Title>
       <Filter />
       {isLoading && <LoaderMore />}
-      {error && <ErrorMessage />}
+      {error && <ErrorMessage error={error} />}
       <ContactList />
       <ToastContainer position="top-center" theme="colored" />
     </Container>
